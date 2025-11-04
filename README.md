@@ -2,4 +2,4 @@
 
 Submitted by **Jomari S. Besana**\
 Submitted to **Sir Ali**\
-Submitted on **November 5, 2025**\
+Submitted on **November 5, 2025**
