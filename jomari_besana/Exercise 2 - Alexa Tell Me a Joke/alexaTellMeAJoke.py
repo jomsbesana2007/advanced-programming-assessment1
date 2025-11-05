@@ -34,9 +34,9 @@ with open(r"Exercise 2 - Alexa Tell me a Joke\Jokes.txt", encoding="UTF8") as jo
 
         # Asks the user to type 'why?' to show the punchline
         while True:
-            userPrompt = input("\nType 'why?' : ").strip()
+            userPrompt = input("\nType 'go on' : ").strip()
 
-            if userPrompt.lower() == 'why?':
+            if userPrompt.lower() == 'go on':
                 break
             else:
                 print("I didn't understand.")
