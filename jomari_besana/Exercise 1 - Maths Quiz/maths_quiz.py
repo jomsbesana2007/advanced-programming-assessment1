@@ -35,11 +35,9 @@ def randomInt(difficulty):
 def decideOperation():
     # A dictionary of all the operator module functions (e.g., op.add) and operators (e.g., '+')
     operations = {op.add: '+', op.sub: '-'}
-    # .choice() function is used to randomly choose an operation from the dictionary
+    # Randomly chooses an operation from the dictionary
     operation, operator = r.choice(list(operations.items()))
 
-    # operation - returns the operator module function that was chosen randomly
-    # operator - returns the string version of the operator to print in the problem
     return operation, operator
 
 # Displays the problem for the user to solve
@@ -91,12 +89,12 @@ while questionNumber <= 10:
         chosenDifficulty = displayMenu()
 
     # CHOOSING NUMBERS AND OPERATIONS RANDOMLY
-    x, y = randomInt(chosenDifficulty) # Retrieves the numbers that were chosen randomly using randint() function
+    x, y = randomInt(chosenDifficulty) # Stores integers to be calculated
     operation, operator = decideOperation() # Retrieves operation (the module function) and operator (the string form)
 
     # DISPLAYING THE PROBLEM
     problem = f"[{questionNumber}] {x} {operator} {y}" # The written form of the problem
-    correctAns = operation(x,y) # Refers to the correct answer
+    correctAns = operation(x,y)
 
     # USER ATTEMPTS TO ANSWER THE PROBLEM CORRECTLY
     attempts = 1
@@ -120,7 +118,7 @@ while questionNumber <= 10:
 
     # END OF QUIZ
     if questionNumber == 11:  # End of the program once questionNumber = 11
-        userGrade = displayResults(userPts) # Displays result
+        userGrade = displayResults(userPts)
         print(userGrade)
         retry = input("Do you wanna play again?\n'Y' for Yes, 'N' for No : ").strip()
         print(" ") # Spacing

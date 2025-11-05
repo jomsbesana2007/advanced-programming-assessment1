@@ -11,14 +11,14 @@ window['bg'] = "#DBDBDB"
 def readfile():
     # Opens the file
     with open(r"Exercise 3 - Student Manager\Marks.txt", encoding="UTF-8") as f:
-        studentsRecords = [] # Empty list to store dictionaries containing information and records of each student
-        grading = {'A': (70, 100), 'B': (60, 69), 'C': (50, 59), 'D': (40, 49), 'F': (0, 39)} # To categorise students' grades
+        studentsRecords = [] # List of student records
+        grading = {'A': (70, 100), 'B': (60, 69), 'C': (50, 59), 'D': (40, 49), 'F': (0, 39)}
         cleaned_f = [i.strip() for i in f if i != '\n'] # Removes any '\n' characters
-        
+    
         for student in cleaned_f:
-            # Splits the data combined into one string (e.g., ["1001, Ava Williams, 13,15,17,70"]) into usable data by ',')
-            s_list = [s.strip() for s in student.split(',')]
-
+            # Makes data usable by splitting values by ','
+            s_list = student.split(',')
+        
             # Creates a dictionary containing information about each student
             s_info = {}
 
@@ -29,18 +29,16 @@ def readfile():
             s_info["Exam Score"] = f"{int(s_list[5])}%"
 
             # Grades the final exam scores
-            for grade, (min, max) in grading.items(): # for reference: {'A': (70, 100)}
+            for grade, (min, max) in grading.items():
                 if min <= int(s_list[5]) <= max: # Checks if the student's grade is within a specified range
-                    s_info["Grade"] = grade # The student's grade is assigned to the "Grade" key as a value
+                    s_info["Grade"] = grade
             
             # Informaton about the student, stored in dictionaries, is appended to the studentsList
             studentsRecords.append(s_info) 
 
         # Returns the full list with the dictionaries after the for loop ends
         return studentsRecords
-    
-# studentRecords refers to the return value of readfile(), which is studentsRecords.
-# Therefore the variable stores the full list and can be used in the rest of the program
+
 studentsRecords = readfile()
 
 # Tkinter Styles
@@ -91,7 +89,7 @@ btn1.grid(row=0, column=1, sticky=W, padx=20, ipadx=25, ipady=10)
 def showHighestMark():
     txtBox.delete('1.0', END) 
     examScores = [s["Exam Score"] for s in studentsRecords] # Appends all the scores of each student
-    highestScore = max(examScores) # Finds the highest score from the list and stores it in highestScore
+    highestScore = max(examScores)
 
     for s in studentsRecords:
         if highestScore == s["Exam Score"]: # Checks if the highest score in the list belongs to a particular student so that their information is correctly printed
@@ -106,7 +104,7 @@ btn2.grid(row=0, column=2, sticky=EW, padx=20, ipadx=25, ipady=10)
 def showLowestMark():
     txtBox.delete('1.0', END)
     examScores = [s["Exam Score"] for s in studentsRecords] # A list containing all of the exam scores
-    lowestScore = min(examScores) # Finds the lowest score from the list and stores it in lowestScore
+    lowestScore = min(examScores)
     
     for s in studentsRecords:
         if lowestScore == s["Exam Score"]: # Checks if the lowest score in the list belongs to a particular student
@@ -147,5 +145,4 @@ def exitApp():
 exitbtn = Button(window, text="Exit", command=exitApp, style="Exit.TButton")
 exitbtn.place(x=10, y=10)
 
-# An infinite loop which will run until the user exits the app
 window.mainloop()
