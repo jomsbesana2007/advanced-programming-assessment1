@@ -7,7 +7,7 @@ with open(r"Exercise 2 - Alexa Tell me a Joke\Jokes.txt", encoding="UTF8") as jo
 
     # Splits the joke line into two which are separated by a '?'.
     # The first line is the setup and the second line is the punchline
-    split_l = [x.split('?') for x in clean_l if '?' in x]
+    jokes = [x.split('?') for x in clean_l if '?' in x]
 
     # First while loop which executes until the user types the prompt, 'Alexa tell me a joke'
     while True:
@@ -26,8 +26,8 @@ with open(r"Exercise 2 - Alexa Tell me a Joke\Jokes.txt", encoding="UTF8") as jo
 
     # Second while loop which executes until the user decides to exit the program
     while alexaLoop == True:
-        # Chooses a random joke from the said jokes_list
-        chosenjoke = r.choice(split_l)
+        # Chooses a random joke from the said jokes list
+        chosenjoke = r.choice(jokes)
         
         # Prints the setup/question
         print(f"\n{chosenjoke[0]}?")
