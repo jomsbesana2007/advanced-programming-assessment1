@@ -2,7 +2,6 @@ import random as r
 import operator as op
 
 # FUNCTIONS
-
 # Displays the menu of all difficulties the user can choose from
 def displayMenu():
     # While loop that continues running when the user enters an erroneous entry
@@ -44,40 +43,32 @@ def decideOperation():
     return operation, operator
 
 # Displays the problem for the user to solve
-def displayProblem(problem, correctAns):
-    # Initialises the number of attempts
-    attempts = 1
+def displayProblem(problem):
 
-    # Loop executes two times as the user is only given 2 attempts
-    while attempts <= 2:
-        print(f"Attempts: {attempts}")
-        print(problem)
-        userAns = int(input("Answer : "))
-        print(" ") # Spacing
+    print(problem)
+    userAns = int(input("Answer : "))
+    print(" ") # Spacing
 
-        # Returns user's answer and attempts if answer is correct
-        if userAns == correctAns:
-            return userAns, attempts
-        
-        # Updates number of attempts
-        attempts += 1
-
-    # Returns the user's last answer and total attempts when user fails to answer correctly twice
-    return userAns, attempts
+    return userAns
 
 # Determines the number of points that will be given to the user based on how many attempts they took
 def isCorrect(userAns, correctAns, attempts):
+    addPts = 0
+    endLoop = False
     # Checks both the user's answer and the number of attempts to give the right amount of points
     if userAns == correctAns and attempts == 1:
         print(f"Correct! the answer is {correctAns}, you got 10 points!")
         addPts = 10
+        endLoop = True # Ends loop
     elif userAns == correctAns and attempts == 2:
         print(f"Correct! the answer is {correctAns}, you got 5 points")
         addPts = 5
-    elif attempts > 2:
+        endLoop = True
+    elif attempts == 2:
         print(f"Sorry, the answer is {correctAns}. You can try again in the next question")
         addPts = 0
-    return addPts
+        endLoop = True
+    return addPts, endLoop
 
 # Displays the user's grade based on how many points they attained
 def displayResults(userPts):
@@ -89,7 +80,6 @@ def displayResults(userPts):
             return f"Total Score : {userPts} | Grade: {grade}"
 
 # MAIN PROGRAM
-
 questionNumber = 1 # Starts with 1 as it is the first question
 userPts = 0 # User starts with zero points
 
@@ -104,14 +94,25 @@ while questionNumber <= 10:
     x, y = randomInt(chosenDifficulty) # Retrieves the numbers that were chosen randomly using randint() function
     operation, operator = decideOperation() # Retrieves operation (the module function) and operator (the string form)
 
-    # DISPLAYING THE PROBLEM AND USER ANSWERS THE PROBLEM
+    # DISPLAYING THE PROBLEM
     problem = f"[{questionNumber}] {x} {operator} {y}" # The written form of the problem
     correctAns = operation(x,y) # Refers to the correct answer
-    userAns, attempts = displayProblem(problem, correctAns) # Displays the problem
 
-    # ADDING POINTS
-    addPts = isCorrect(userAns, correctAns, attempts) 
-    userPts += addPts # Updates the total points
+    # USER ATTEMPTS TO ANSWER THE PROBLEM CORRECTLY
+    attempts = 1
+    endAttemptsLoop = False
+
+    while attempts <= 2 and endAttemptsLoop == False:
+        print(f"Attempts: {attempts}")
+        userAns = displayProblem(problem) # Displays the problem
+        
+        # ADDING POINTS
+        addPts, endLoop = isCorrect(userAns, correctAns, attempts)
+        userPts += addPts # Updates the total points
+
+        endAttemptsLoop = endLoop # If the value is set to True, the loop ends
+
+        attempts += 1
 
     print(f"Current Amount of Points : {userPts}\n") # Displays total points
 

@@ -45,7 +45,7 @@ with open(r"Exercise 2 - Alexa Tell me a Joke\Jokes.txt", encoding="UTF8") as jo
         # Prints the punchline
         print(f"\n{chosenjoke[1].strip()}")
         
-        # A nested while loop that runs when there's an error with the user's entry as seen in the 'else' block
+        # A nested while loop asking if the user wants to hear another joke
         while True:
             userPrompt = input("\nDo you want to tell another joke?\n'Y' for Yes and 'N' for No : ").strip()
 
