@@ -8,7 +8,7 @@ def displayMenu():
     # While loop that continues running when the user enters an erroneous entry
     while True:
         print("SELECT DIFFICULTY LEVEL\n1 - Easy\n2 - Moderate\n3 - Advanced")
-        userChoice = input('Enter here : ')
+        userChoice = input('Enter a number : ')
         print(" ") # Spacing
         choices = ['1', '2', '3']
         if userChoice not in choices:
