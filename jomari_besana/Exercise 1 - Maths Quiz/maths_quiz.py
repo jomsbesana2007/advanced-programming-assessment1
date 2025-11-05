@@ -95,8 +95,9 @@ userPts = 0 # User starts with zero points
 
 # Loop ends when questionNumber = 11, falsifying the condition as there are only 10 questions
 while questionNumber <= 10:
-    # Beginning of the program, where the value of questionNumber is set to 1
-    if questionNumber == 1:
+    
+    # START 
+    if questionNumber == 1: # When questionNumber is 1, the menu will display
         chosenDifficulty = displayMenu()
 
     # CHOOSING NUMBERS AND OPERATIONS RANDOMLY
